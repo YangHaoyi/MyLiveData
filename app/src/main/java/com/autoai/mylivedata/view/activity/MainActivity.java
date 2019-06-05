@@ -1,7 +1,9 @@
 package com.autoai.mylivedata.view.activity;
 
+import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.autoai.mylivedata.R;
+import com.autoai.mylivedata.databinding.ActivityMainBinding;
 import com.autoai.mylivedata.view.IPoetryView;
 import com.autoai.mylivedata.view.impl.PoetryViewImpl;
 import com.autoai.mylivedata.viewmodel.MyViewModel;
@@ -33,11 +36,13 @@ public class MainActivity extends FragmentActivity {
     private TextView edInput;
     /**  实现view **/
     private IPoetryView poetryView;
+    /**  数据绑定 **/
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         init();
     }
 
@@ -66,7 +71,7 @@ public class MainActivity extends FragmentActivity {
             @Override
             public void onChanged(@Nullable PoetryData data) {
                 poetryView.hideLoading();
-                poetryView.updatePoetry(data.getResult().get(0).getDesc());
+                binding.setPoetryData(data);
             }
         });
     }

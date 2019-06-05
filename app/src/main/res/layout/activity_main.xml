@@ -1,27 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<data>
+    <variable name="poetryData"
+        type="com.autoai.mylivedata.model.bean.PoetryData"/>
+</data>
+<LinearLayout
     android:orientation="vertical"
-    tools:context=".view.activity.MainActivity">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/edInput"
-        android:hint="@string/poetry_input"
-        style="@style/Common_EditText"/>
+    android:id="@+id/edInput"
+    android:hint="@string/poetry_input"
+    style="@style/Common_EditText"/>
     <View
-        style="@style/Common_CutLine"/>
+    style="@style/Common_CutLine"/>
     <TextView
-        android:id="@+id/tvPoetryRequest"
-        style="@style/Common_Button"
-        android:text="@string/poetry_request"/>
+    android:id="@+id/tvPoetryRequest"
+    style="@style/Common_Button"
+    android:text="@string/poetry_request"/>
     <View
-        style="@style/Common_CutLine"/>
+    style="@style/Common_CutLine"/>
     <TextView
-        android:id="@+id/tvPoetryDetail"
-        style="@style/Common_Button"
-        android:text="@string/poetry_detail"/>
+    android:id="@+id/tvPoetryDetail"
+    style="@style/Common_Button"
+    android:text="@{poetryData.getResult().get(0).getDesc()??`详情`}"/>
 
 </LinearLayout>
+</layout>
